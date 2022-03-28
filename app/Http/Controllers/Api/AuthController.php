@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\Store;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\RespondsWithHttpStatus;
 
@@ -27,14 +29,23 @@ class AuthController extends Controller
         return response($response, 201);
     }
 
+
     public function register(UserRequest $request)
     {
-        $user = User::create([
-            'type' => $request->type,
-            'name' => $request->name,
-            'password' => bcrypt($request->password),
-            'email' => $request->email
-        ]);
+
+                $user = User::create([
+                    'type' => $request->type,
+                    'name' => $request->name,
+                    'password' => bcrypt($request->password),
+                    'email' => $request->email
+                ]);
+
+                $store = new Store();
+                $store->merchant_id = $user->id;
+                $store->save();
+
+
+
         return $this->success([
             'user' => $user,
             'token' => $user->createToken('tokens')->plainTextToken

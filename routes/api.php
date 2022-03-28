@@ -27,4 +27,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return auth()->user();
     });
     Route::post('/sign-out', [\App\Http\Controllers\Api\AuthController::class, 'signout']);
+    Route::post('/store/settings', [\App\Http\Controllers\Api\SettingsController::class, 'index']);
+    Route::post('/store/set-product', [\App\Http\Controllers\Api\ProductController::class, 'set_product']);
 });
