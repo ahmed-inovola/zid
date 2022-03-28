@@ -30,4 +30,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/store/settings', [\App\Http\Controllers\Api\SettingsController::class, 'index']);
     Route::post('/store/set-product', [\App\Http\Controllers\Api\ProductController::class, 'set_product']);
     Route::post('/add-cart', [\App\Http\Controllers\Api\ProductController::class, 'add_cart']);
+    Route::get('/calc-cart', [\App\Http\Controllers\Api\ProductController::class, 'calc_cart']);
 });

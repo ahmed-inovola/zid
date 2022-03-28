@@ -12,5 +12,9 @@ class Product extends Model
 
     public $translatable = ['name', 'description'];
 
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
 
 }
