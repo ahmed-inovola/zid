@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Models\Cart;
 use App\Models\Product;
 use App\Traits\RespondsWithHttpStatus;
 use Illuminate\Http\Request;
@@ -33,6 +34,21 @@ class ProductController extends Controller
 
         } else {
             return $this->failure("You don't have store");
+        }
+    }
+
+    public function add_cart(Request $request)
+    {
+        $product = Product::find($request->product_id);
+
+        if ($product) {
+            $cart = new Cart();
+            $cart->product_id = $product->id;
+            $cart->user_id = auth()->user()->id;
+            $cart->save();
+            return $this->success([], 'Product Added To Cart successfully');
+        }else{
+            return $this->failure("Product Not Found");
         }
     }
 }

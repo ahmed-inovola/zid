@@ -29,4 +29,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/sign-out', [\App\Http\Controllers\Api\AuthController::class, 'signout']);
     Route::post('/store/settings', [\App\Http\Controllers\Api\SettingsController::class, 'index']);
     Route::post('/store/set-product', [\App\Http\Controllers\Api\ProductController::class, 'set_product']);
+    Route::post('/add-cart', [\App\Http\Controllers\Api\ProductController::class, 'add_cart']);
 });
